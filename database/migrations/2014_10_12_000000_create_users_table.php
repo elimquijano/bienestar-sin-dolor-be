@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('gender');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('image')->default('images/profile.png');
+            $table->string('image')->default('images/profiles/default.png');
             $table->string('dni')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();

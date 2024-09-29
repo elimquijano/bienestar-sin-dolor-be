@@ -27,30 +27,35 @@ class UserController extends Controller
     {
         $response = ["status" => false, "msg" => ""];
         $data = json_decode($request->getContent());
-
+        
         $user = User::where('email', $data->email)->first();
-
-        if ($user && Hash::check($data->password, $user->password)) {
-            $token = $user->createToken("example");
-
-            $response["status"] = true;
-            $response["msg"] = "Usuario encontrado correctamente.";
-            $response["token"] = $token->plainTextToken;
-            $response["loggin_info"] = $user;
-
-            $userRoles = RolUser::query()->where('user_id', $user->id)
-                ->pluck('rol_id');
-
-            $privileges = Privilegio::query()->join('rol_privilegios', 'privilegios.id', '=', 'rol_privilegios.privilegio_id')
-                ->whereIn('rol_privilegios.rol_id', $userRoles)
-                ->select('privilegios.id', 'privilegios.name', 'privilegios.code', 'privilegios.description', 'privilegios.type', 'privilegios.id_modulo', 'privilegios.created_at', 'privilegios.updated_at')
-                ->get();
-
-            $uniquePrivileges = $privileges->unique('id')->values();
-            $response["privilegios"] = $uniquePrivileges;
+        if (!$user) {
+            $response["msg"] = "El correo electrónico no pertenece a ninguna cuenta.";
         } else {
-            $response["msg"] = "Credenciales incorrectas.";
+
+            if ($user && Hash::check($data->password, $user->password)) {
+                $token = $user->createToken("example");
+
+                $response["status"] = true;
+                $response["msg"] = "Usuario encontrado correctamente.";
+                $response["token"] = $token->plainTextToken;
+                $response["user_session"] = $user;
+
+                $userRoles = RolUser::query()->where('user_id', $user->id)
+                    ->pluck('rol_id');
+
+                $privileges = Privilegio::query()->join('rol_privilegios', 'privilegios.id', '=', 'rol_privilegios.privilegio_id')
+                    ->whereIn('rol_privilegios.rol_id', $userRoles)
+                    ->select('privilegios.id', 'privilegios.name', 'privilegios.code', 'privilegios.description', 'privilegios.type', 'privilegios.id_modulo', 'privilegios.created_at', 'privilegios.updated_at')
+                    ->get();
+
+                $uniquePrivileges = $privileges->unique('id')->values();
+                $response["privilegios"] = $uniquePrivileges;
+            } else {
+                $response["msg"] = "Credenciales incorrectas.";
+            }
         }
+
         return response()->json($response);
     }
 
