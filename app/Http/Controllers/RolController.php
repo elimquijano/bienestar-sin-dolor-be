@@ -90,4 +90,12 @@ class RolController extends Controller
 
         return response()->json($roles);
     }
+
+    public function rolWithUsers($id){
+        $rol = Rol::with('users')->find($id);
+        if (!$rol) {
+            return response()->json(["messaje"=>"No se encontró el rol"], 404);
+        }
+        return response()->json($rol, 201);
+    }
 }

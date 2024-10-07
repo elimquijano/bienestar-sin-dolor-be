@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\MensajeController;
 use App\Http\Controllers\ModuloController;
+use App\Http\Controllers\ParticipanteController;
 use App\Http\Controllers\PrivilegioController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\RolPrivilegioController;
@@ -38,6 +41,7 @@ Route::get('/rol/{id}', [RolController::class, 'show']);
 Route::post('/rol', [RolController::class, 'store']);
 Route::put('/rol/{id}', [RolController::class, 'update']);
 Route::delete('/rol/{id}', [RolController::class, 'destroy']);
+Route::get('/rolwithusers/{id}', [RolController::class, 'rolWithUsers']);
 
 Route::get('/modulo', [ModuloController::class, 'search']);
 Route::get('/modulo/{id}', [ModuloController::class, 'show']);
@@ -63,3 +67,24 @@ Route::get('/roluser/{id}', [RolUserController::class, 'show']);
 Route::post('/roluser', [RolUserController::class, 'store']);
 Route::put('/roluser/{id}', [RolUserController::class, 'update']);
 Route::delete('/roluser/{id}', [RolUserController::class, 'destroy']);
+
+Route::get('/conversation', [ConversationController::class, 'search']);
+Route::get('/conversationall', [ConversationController::class, 'index']);
+Route::get('/conversation/{id}', [ConversationController::class, 'show']);
+Route::post('/conversation', [ConversationController::class, 'store']);
+Route::put('/conversation/{id}', [ConversationController::class, 'update']);
+Route::delete('/conversation/{id}', [ConversationController::class, 'destroy']);
+
+Route::get('/mensaje', [MensajeController::class, 'search']);
+Route::get('/mensajeall', [MensajeController::class, 'index']);
+Route::get('/mensaje/{id}', [MensajeController::class, 'show']);
+Route::post('/mensaje', [MensajeController::class, 'store']);
+Route::put('/mensaje/{id}', [MensajeController::class, 'update']);
+Route::delete('/mensaje/{id}', [MensajeController::class, 'destroy']);
+
+Route::get('/participante', [ParticipanteController::class, 'search']);
+Route::get('/participanteall', [ParticipanteController::class, 'index']);
+Route::get('/participante/{id}', [ParticipanteController::class, 'show']);
+Route::post('/participante', [ParticipanteController::class, 'store']);
+Route::put('/participante/{id}', [ParticipanteController::class, 'update']);
+Route::delete('/participante/{id}', [ParticipanteController::class, 'destroy']);
