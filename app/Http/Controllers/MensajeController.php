@@ -57,12 +57,12 @@ class MensajeController extends Controller
     public function search(Request $request)
     {
         $conversation_id = $request->input('conversation_id');
-        $paginate = $request->input('paginate') ?? 10;
+        $paginate = $request->input('paginate') ?? 100;
 
         $mensajes = Mensaje::query();
 
         if ($conversation_id) {
-            $mensajes->where('conversation_id', 'like', "%$conversation_id%");
+            $mensajes->where('conversation_id', '=', $conversation_id);
         }
         $mensajes->orderBy('id', 'desc');
 

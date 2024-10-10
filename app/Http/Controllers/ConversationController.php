@@ -21,7 +21,11 @@ class ConversationController extends Controller
             return response()->json(['message' => 'Conversación no encontrado'], 404);
         }
 
-        return response()->json($conversation);
+        $conversation = Conversation::with(['participantes', 'mensajes'])
+            ->where('id', $id)
+            ->first();
+
+        return response()->json($conversation, 201);
     }
 
     public function store(Request $request)
@@ -53,7 +57,7 @@ class ConversationController extends Controller
         $conversation->delete();
         return response()->json(['message' => 'Conversación eliminado con éxito']);
     }
-    
+
     public function search(Request $request)
     {
         $id = $request->input('form_id');

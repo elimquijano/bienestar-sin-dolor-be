@@ -88,3 +88,4 @@ Route::get('/participante/{id}', [ParticipanteController::class, 'show']);
 Route::post('/participante', [ParticipanteController::class, 'store']);
 Route::put('/participante/{id}', [ParticipanteController::class, 'update']);
 Route::delete('/participante/{id}', [ParticipanteController::class, 'destroy']);
+Route::get('/participanteconversation', [ParticipanteController::class, 'searchConversations']);

@@ -56,4 +56,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Rol::class, 'rol_users', 'user_id', 'rol_id');
     }
+    public function participantes()
+    {
+        return $this->belongsToMany(Conversation::class, 'participantes', 'user_id', 'conversation_id');
+    }
 }
