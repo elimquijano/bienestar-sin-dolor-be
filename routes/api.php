@@ -64,14 +64,18 @@ Route::delete('/rolprivilegio/{id}', [RolPrivilegioController::class, 'destroy']
 
 Route::get('/roluser', [RolUserController::class, 'search']);
 Route::get('/roluser/{id}', [RolUserController::class, 'show']);
+Route::get('/rolusername', [RolUserController::class, 'UserFromRolName']);
 Route::post('/roluser', [RolUserController::class, 'store']);
 Route::put('/roluser/{id}', [RolUserController::class, 'update']);
 Route::delete('/roluser/{id}', [RolUserController::class, 'destroy']);
 
 Route::get('/conversation', [ConversationController::class, 'search']);
-Route::get('/conversationall', [ConversationController::class, 'index']);
 Route::get('/conversation/{id}', [ConversationController::class, 'show']);
+Route::get('/conversationall', [ConversationController::class, 'index']);
+Route::get('/conversationexist', [ConversationController::class, 'getConversationIfExists']);
 Route::post('/conversation', [ConversationController::class, 'store']);
+Route::post('/conversationbloque', [ConversationController::class, 'create']);
+Route::post('/conversationreadmessages', [ConversationController::class, 'readAllMessages']);
 Route::put('/conversation/{id}', [ConversationController::class, 'update']);
 Route::delete('/conversation/{id}', [ConversationController::class, 'destroy']);
 

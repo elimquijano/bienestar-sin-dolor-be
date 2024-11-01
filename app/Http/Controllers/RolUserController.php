@@ -74,4 +74,18 @@ class RolUserController extends Controller
 
         return response()->json($rolUsers);
     }
+
+    public function UserFromRolName(Request $request)
+    {
+        $form_name = $request->input('form_name');
+        if (!$form_name) {
+            return response()->json(['message' => "El campo nombre es necesario"], 404);
+        }
+        $rolUser = RolUser::query()
+            ->join('rols', 'rol_id', '=', 'rols.id')
+            ->where('rols.name', 'like', "%$form_name%")
+            ->first();
+
+        return response()->json($rolUser, 201);
+    }
 }

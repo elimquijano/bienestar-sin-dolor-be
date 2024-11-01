@@ -86,37 +86,33 @@ class ParticipanteController extends Controller
         $userId = $request->input('user_id');
         $tipoId = $request->input('tipo_id');
 
-        if (!$userId || !$tipoId) {
-            return response()->json(["message" => "El usuario y tipo es requerido"], 404);
+        if (!$userId) {
+            return response()->json(["message" => "El usuario es requerido"], 404);
         }
 
-        $conversaciones = Conversation::where('tipo_id', $tipoId)
-            ->whereHas('participante', function ($query) use ($userId) {
-                // Asegurarse de que el usuario es un participante
-                $query->where('user_id', $userId);
-            })
-            ->with(['participante' => function ($query) use ($userId) {
-                // Excluir al participante que es el mismo que el user_id
-                $query->where('user_id', '!=', $userId);
-            }, 'mensaje' => function ($query) use ($userId) {
-                // Obtener solo los mensajes que no han sido leídos por el usuario
+        // Construir la consulta
+        $conversaciones = Conversation::query();
+
+        if ($tipoId) {
+            $conversaciones->where('tipo_id', $tipoId);
+        }
+
+        $conversaciones->whereHas('participante', function ($query) use ($userId) {
+            // Asegurarse de que el usuario es un participante
+            $query->where('user_id', $userId);
+        })
+            ->with(['participantes', 'mensaje' => function ($query) {
+                // Obtener el último mensaje de la conversación
+                $query->orderBy('created_at', 'desc')->limit(3);
+            }])
+            ->withCount(['mensajes as unread_count' => function ($query) use ($userId) {
+                // Contar solo los mensajes que no han sido leídos por el usuario
                 $query->where('user_id', '!=', $userId)
                     ->where('is_read', false);
-            }])
-            ->get();$conversaciones = Conversation::where('tipo_id', $tipoId)
-            ->whereHas('participante', function($query) use ($userId) {
-                // Asegurarse de que el usuario es un participante
-                $query->where('user_id', $userId);
-            })
-            ->with(['participante' => function($query) use ($userId) {
-                // Excluir al participante que es el mismo que el user_id
-                $query->where('user_id', '!=', $userId);
-            }, 'mensaje' => function($query) use ($userId) {
-                // Obtener solo los mensajes que no han sido leídos por el usuario
-                $query->where('user_id', '!=', $userId)
-                      ->where('is_read', false);
-            }])
-            ->get();
+            }]);
+
+        // Obtener los resultados
+        $conversaciones = $conversaciones->get();
 
         // Retornar la respuesta en formato JSON
         return response()->json($conversaciones, 200);
