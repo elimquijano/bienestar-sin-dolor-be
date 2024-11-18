@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Conversation extends Model
+class EnfermedadSintoma extends Model
 {
-    protected $fillable = ['user_id'];
     use HasFactory;
+    protected $fillable = ['enfermedad_id', 'sintoma_id'];
 }

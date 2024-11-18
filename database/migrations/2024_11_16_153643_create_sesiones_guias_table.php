@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conversations', function (Blueprint $table) {
+        Schema::create('sesiones_guias', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('tratamiento_guia_id')->constrained('tratamientos_guias')->cascadeOnDelete();
+            $table->text('descripcion');
             $table->timestamps();
-            // Add a foreign key constraint to link the conversation to a user
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('conversations');
+        Schema::dropIfExists('sesiones_guias');
     }
 };

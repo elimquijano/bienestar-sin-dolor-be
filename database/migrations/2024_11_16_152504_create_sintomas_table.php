@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conversations', function (Blueprint $table) {
+        Schema::create('sintomas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->text('descripcion'); // Descripción del síntoma
+            $table->text('etiquetas')->nullable(); // Etiquetas o palabras clave asociadas al síntoma (opcional)
+            $table->integer('peso')->default(1); // Peso del síntoma
             $table->timestamps();
-            // Add a foreign key constraint to link the conversation to a user
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('conversations');
+        Schema::dropIfExists('sintomas');
     }
 };

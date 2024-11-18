@@ -1,13 +1,17 @@
 <?php
 
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ConversationController;
-use App\Http\Controllers\MensajeController;
+use App\Http\Controllers\EnfermedadController;
+use App\Http\Controllers\EnfermedadSintomaController;
+use App\Http\Controllers\InteraccionController;
 use App\Http\Controllers\ModuloController;
-use App\Http\Controllers\ParticipanteController;
+use App\Http\Controllers\EspecialistaController;
 use App\Http\Controllers\PrivilegioController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\RolPrivilegioController;
 use App\Http\Controllers\RolUserController;
+use App\Http\Controllers\SintomaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -72,24 +76,49 @@ Route::delete('/roluser/{id}', [RolUserController::class, 'destroy']);
 Route::get('/conversation', [ConversationController::class, 'search']);
 Route::get('/conversation/{id}', [ConversationController::class, 'show']);
 Route::get('/conversationall', [ConversationController::class, 'index']);
-Route::get('/conversationexist', [ConversationController::class, 'getConversationIfExists']);
 Route::post('/conversation', [ConversationController::class, 'store']);
-Route::post('/conversationbloque', [ConversationController::class, 'create']);
-Route::post('/conversationreadmessages', [ConversationController::class, 'readAllMessages']);
 Route::put('/conversation/{id}', [ConversationController::class, 'update']);
 Route::delete('/conversation/{id}', [ConversationController::class, 'destroy']);
 
-Route::get('/mensaje', [MensajeController::class, 'search']);
-Route::get('/mensajeall', [MensajeController::class, 'index']);
-Route::get('/mensaje/{id}', [MensajeController::class, 'show']);
-Route::post('/mensaje', [MensajeController::class, 'store']);
-Route::put('/mensaje/{id}', [MensajeController::class, 'update']);
-Route::delete('/mensaje/{id}', [MensajeController::class, 'destroy']);
+Route::get('/interaccion', [InteraccionController::class, 'search']);
+Route::get('/interaccionall', [InteraccionController::class, 'index']);
+Route::get('/interaccion/{id}', [InteraccionController::class, 'show']);
+Route::post('/interaccion', [InteraccionController::class, 'store']);
+Route::put('/interaccion/{id}', [InteraccionController::class, 'update']);
+Route::delete('/interaccion/{id}', [InteraccionController::class, 'destroy']);
 
-Route::get('/participante', [ParticipanteController::class, 'search']);
-Route::get('/participanteall', [ParticipanteController::class, 'index']);
-Route::get('/participante/{id}', [ParticipanteController::class, 'show']);
-Route::post('/participante', [ParticipanteController::class, 'store']);
-Route::put('/participante/{id}', [ParticipanteController::class, 'update']);
-Route::delete('/participante/{id}', [ParticipanteController::class, 'destroy']);
-Route::get('/participanteconversation', [ParticipanteController::class, 'searchConversations']);
+Route::get('/especialista', [EspecialistaController::class, 'search']);
+Route::get('/especialistaall', [EspecialistaController::class, 'index']);
+Route::get('/especialista/{id}', [EspecialistaController::class, 'show']);
+Route::post('/especialista', [EspecialistaController::class, 'store']);
+Route::put('/especialista/{id}', [EspecialistaController::class, 'update']);
+Route::delete('/especialista/{id}', [EspecialistaController::class, 'destroy']);
+
+Route::get('/categoria', [CategoriaController::class, 'search']);
+Route::get('/categoriaall', [CategoriaController::class, 'index']);
+Route::get('/categoria/{id}', [CategoriaController::class, 'show']);
+Route::post('/categoria', [CategoriaController::class, 'store']);
+Route::put('/categoria/{id}', [CategoriaController::class, 'update']);
+Route::delete('/categoria/{id}', [CategoriaController::class, 'destroy']);
+
+Route::get('/enfermedad', [EnfermedadController::class, 'search']);
+Route::get('/enfermedadall', [EnfermedadController::class, 'index']);
+Route::get('/enfermedadwithsintoma', [EnfermedadController::class, 'withSintoma']);
+Route::get('/enfermedad/{id}', [EnfermedadController::class, 'show']);
+Route::post('/enfermedad', [EnfermedadController::class, 'store']);
+Route::put('/enfermedad/{id}', [EnfermedadController::class, 'update']);
+Route::delete('/enfermedad/{id}', [EnfermedadController::class, 'destroy']);
+
+Route::get('/sintoma', [SintomaController::class, 'search']);
+Route::get('/sintomaall', [SintomaController::class, 'index']);
+Route::get('/sintoma/{id}', [SintomaController::class, 'show']);
+Route::post('/sintoma', [SintomaController::class, 'store']);
+Route::put('/sintoma/{id}', [SintomaController::class, 'update']);
+Route::delete('/sintoma/{id}', [SintomaController::class, 'destroy']);
+
+Route::get('/enfermedadsintoma', [EnfermedadSintomaController::class, 'search']);
+Route::get('/enfermedadsintomaall', [EnfermedadSintomaController::class, 'index']);
+Route::get('/enfermedadsintoma/{id}', [EnfermedadSintomaController::class, 'show']);
+Route::post('/enfermedadsintoma', [EnfermedadSintomaController::class, 'store']);
+Route::put('/enfermedadsintoma/{id}', [EnfermedadSintomaController::class, 'update']);
+Route::delete('/enfermedadsintoma/{id}', [EnfermedadSintomaController::class, 'destroy']);

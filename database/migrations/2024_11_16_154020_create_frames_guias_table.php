@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conversations', function (Blueprint $table) {
+        Schema::create('frames_guias', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('guia_ejercicio_id')->constrained('ejercicios_guias')->cascadeOnDelete();
+            $table->integer('numero_frame');
+            $table->json('coordenadas'); // JSON para almacenar puntos
             $table->timestamps();
-            // Add a foreign key constraint to link the conversation to a user
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('conversations');
+        Schema::dropIfExists('frames_guias');
     }
 };

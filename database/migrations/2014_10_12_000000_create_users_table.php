@@ -20,10 +20,6 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('image')->default('images/profiles/default.png');
-            $table->string('dni')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('address')->nullable();
-            $table->string('location')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('active')->default(true);
             $table->rememberToken();
