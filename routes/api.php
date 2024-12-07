@@ -8,6 +8,7 @@ use App\Http\Controllers\InteraccionController;
 use App\Http\Controllers\ModuloController;
 use App\Http\Controllers\EspecialistaController;
 use App\Http\Controllers\PrivilegioController;
+use App\Http\Controllers\RadiografiaController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\RolPrivilegioController;
 use App\Http\Controllers\RolUserController;
@@ -45,7 +46,6 @@ Route::get('/rol/{id}', [RolController::class, 'show']);
 Route::post('/rol', [RolController::class, 'store']);
 Route::put('/rol/{id}', [RolController::class, 'update']);
 Route::delete('/rol/{id}', [RolController::class, 'destroy']);
-Route::get('/rolwithusers/{id}', [RolController::class, 'rolWithUsers']);
 
 Route::get('/modulo', [ModuloController::class, 'search']);
 Route::get('/modulo/{id}', [ModuloController::class, 'show']);
@@ -68,24 +68,23 @@ Route::delete('/rolprivilegio/{id}', [RolPrivilegioController::class, 'destroy']
 
 Route::get('/roluser', [RolUserController::class, 'search']);
 Route::get('/roluser/{id}', [RolUserController::class, 'show']);
-Route::get('/rolusername', [RolUserController::class, 'UserFromRolName']);
 Route::post('/roluser', [RolUserController::class, 'store']);
 Route::put('/roluser/{id}', [RolUserController::class, 'update']);
 Route::delete('/roluser/{id}', [RolUserController::class, 'destroy']);
 
 Route::get('/conversation', [ConversationController::class, 'search']);
-Route::get('/conversation/{id}', [ConversationController::class, 'show']);
-Route::get('/conversationall', [ConversationController::class, 'index']);
+/* Route::get('/conversation/{id}', [ConversationController::class, 'show']);
+Route::get('/conversationall', [ConversationController::class, 'index']); */
 Route::post('/conversation', [ConversationController::class, 'store']);
-Route::put('/conversation/{id}', [ConversationController::class, 'update']);
-Route::delete('/conversation/{id}', [ConversationController::class, 'destroy']);
+/* Route::put('/conversation/{id}', [ConversationController::class, 'update']);
+Route::delete('/conversation/{id}', [ConversationController::class, 'destroy']); */
 
 Route::get('/interaccion', [InteraccionController::class, 'search']);
-Route::get('/interaccionall', [InteraccionController::class, 'index']);
-Route::get('/interaccion/{id}', [InteraccionController::class, 'show']);
+/* Route::get('/interaccionall', [InteraccionController::class, 'index']);
+Route::get('/interaccion/{id}', [InteraccionController::class, 'show']); */
 Route::post('/interaccion', [InteraccionController::class, 'store']);
-Route::put('/interaccion/{id}', [InteraccionController::class, 'update']);
-Route::delete('/interaccion/{id}', [InteraccionController::class, 'destroy']);
+/* Route::put('/interaccion/{id}', [InteraccionController::class, 'update']);
+Route::delete('/interaccion/{id}', [InteraccionController::class, 'destroy']); */
 
 Route::get('/especialista', [EspecialistaController::class, 'search']);
 Route::get('/especialistaall', [EspecialistaController::class, 'index']);
@@ -122,3 +121,6 @@ Route::get('/enfermedadsintoma/{id}', [EnfermedadSintomaController::class, 'show
 Route::post('/enfermedadsintoma', [EnfermedadSintomaController::class, 'store']);
 Route::put('/enfermedadsintoma/{id}', [EnfermedadSintomaController::class, 'update']);
 Route::delete('/enfermedadsintoma/{id}', [EnfermedadSintomaController::class, 'destroy']);
+
+Route::get('/radiografia', [RadiografiaController::class, 'search']);
+Route::post('/radiografia', [RadiografiaController::class, 'store']);
