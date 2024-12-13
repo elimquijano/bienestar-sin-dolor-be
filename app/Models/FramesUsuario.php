@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class FramesUsuario extends Model
 {
     use HasFactory;
+    protected $fillable = ['ejercicio_usuario_id','numero_frame','coordenadas', 'valido'];
 }

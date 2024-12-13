@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class SesionesGuia extends Model
 {
     use HasFactory;
+    protected $fillable = ['tratamiento_guia_id', 'descripcion'];
 }

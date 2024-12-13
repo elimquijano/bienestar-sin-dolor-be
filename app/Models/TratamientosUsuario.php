@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class TratamientosUsuario extends Model
 {
     use HasFactory;
+    protected $fillable = ['user_id', 'tratamiento_guia_id', 'fecha_inicio', 'fecha_fin', 'progreso_total', 'estado'];
 }

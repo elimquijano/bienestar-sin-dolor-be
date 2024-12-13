@@ -124,3 +124,17 @@ Route::delete('/enfermedadsintoma/{id}', [EnfermedadSintomaController::class, 'd
 
 Route::get('/radiografia', [RadiografiaController::class, 'search']);
 Route::post('/radiografia', [RadiografiaController::class, 'store']);
+
+Route::get('/tratamientoguia', [TratamientosGuiaController::class, 'search']);
+Route::get('/tratamientoguia/{id}', [TratamientosGuiaController::class, 'find']);
+Route::post('/tratamientoguia', [TratamientosGuiaController::class, 'store']);
+
+Route::get('/sesionguia', [SesionesGuiaController::class, 'search']);
+Route::post('/sesionguia', [SesionesGuiaController::class, 'store']);
+
+Route::get('/tratamientouser', [TratamientosUsuarioController::class, 'search']);
+Route::get('/tratamientouser/{id}', [TratamientosUsuarioController::class, 'find']);
+Route::post('/tratamientouser', [TratamientosUsuarioController::class, 'store']);
+
+Route::get('/sesionuser', [SesionUsuarioController::class, 'search']);
+Route::post('/sesionuser', [SesionUsuarioController::class, 'store']);
